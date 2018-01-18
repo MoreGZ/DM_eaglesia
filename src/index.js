@@ -1,8 +1,14 @@
-import React from 'react';
+import React from 'react'; 
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import { HashRouter, Route } from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker'
+
+import Route from './router/router.jsx'
+// import Home from './pages/home/home.jsx'; 
+
+import './style/reset.css'; 
+
+
+ReactDOM.render(<Route/>, document.getElementById('root'));
 registerServiceWorker();
