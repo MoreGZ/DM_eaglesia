@@ -1,0 +1,289 @@
+﻿功能:访问首页
+路由:/
+输入:null
+输出:首页(text/html)
+    [(size=5)
+        {
+            'title':事件名(string),
+            'url': 具体信息页面链接(string)
+        }
+    ]
+********************************************************************************
+功能:搜索关键词
+路由:/results/wd/{:关键词}
+     /results?wd={:关键词}
+输入:wd:关键词(string) [GET]
+输出:搜索结果(text/html)
+    [
+		'results':
+		[(size<=5)
+			{
+				'title':事件名(string),
+				'value':热度(int),
+				'emotion':
+					{
+						'pos':赞成的比例(%),
+						'neu'中立的比例(%),
+						'neg':反对的比例(%)
+					},
+				'url':具体信息页面链接(string)
+			}
+		]
+		'leader':热点搜索/根据搜索次数排行
+		[(size=8)
+			{
+				'event':事件名(string),
+				'url':事件具体信息页面链接(string),
+				'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+			}
+		]
+    ]
+********************************************************************************
+功能:舆情报表
+路由:/detail/event/{:事件名}
+     /detail?event={:事件名}
+输入:event:事件名(string) [GET]
+输出:事件具体信息(text/html)
+    {
+		'title':事件名(string),
+		'info':事件摘要(string),
+		'rank':实时排名
+        {
+            'totalRank':总榜排名
+				{
+					'rank':排行(int),
+					'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+				}
+            'classRank': 
+				{
+					'class':政治/经济(enum['政治'/'经济']),
+					'rank':类排名(int),
+					'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+				}
+        },
+		'class': 所属类别(string),    [不一定是政治经济]           
+		'total':总报道数(int),                   
+		'track':事件发展                         
+        [
+            {
+				'id':新闻编号(int),
+                'date':发布时间(timestamp|*1000),
+                'title':新闻标题(string),
+                'body':新闻内容(string)          
+                'source':报道来源(string|domain),
+            }
+        ],
+        'emotion':[赞成的比例(%),中立的比例(%),反对的比例(%)],
+        'trend_attitude':态度趋势
+        [(size=17)
+            {
+                'date':日期(timestamp|*1000),
+                'pos':赞成数(int),
+                'neu':中立数(int),
+                'neg':反对数(int)
+            }
+        ],
+		'trend_value':热度趋势
+		[(size=17)
+            {
+                'date':日期(timestamp|*1000),
+                'value':热度(int),
+                'id':新闻id(int),
+                'title':新闻标题(string)
+            }
+        ],
+		'comments':国民评论
+        [(size=6)
+            {
+                'username':用户名(string),
+                'date':评论日期(timestamp|*1000),
+                'source':来源网站(string),
+                'content':评论内容(string)
+            }
+        ],	
+        'keywords':事件全局关键词
+        [(size=20)
+            {
+                'word':关键词(string),
+                'value':权值(int)
+            }
+        ]
+		'posWords':正面高频词汇
+		[(size=8)
+            {
+                'word':关键词(string),
+                'value':权值(int)
+            }
+		]
+		'negWords':反面高频词汇
+		[(size=8)
+            {
+                'word':关键词(string),
+                'value':权值(int)
+            }
+		]
+        'news':
+        [(size=6)
+            {
+				'id':新闻编号(int),
+                'title':标题(string),
+				'date':发表日期(timestamp|*1000),
+                'source':报道来源(string|domain),
+				'body':新闻内容(string)
+            }
+        ]	
+********************************************************************************
+功能：舆情报表获取更多新闻
+路由:忽略
+输入:title:事件名(string)     [POST]
+	 page:页码(int)  从1开始  [POST]
+输出:
+	[(size=6)
+        {
+			'id':新闻编号(int),
+            'title':标题(string),
+			'date':发表日期(timestamp|*1000),
+            'source':报道来源(string|domain),
+			'body':新闻内容(string)
+        }
+    ]
+********************************************************************************
+功能：获取更多评论
+路由:忽略
+输入:title:事件名(string)    [POST]
+	 page:页码(int)  从1开始 [POST]
+输出:
+	[(size=6)
+        {
+			'username':用户名(string),
+            'date':评论日期(timestamp|*1000),
+            'source':来源网站(string),
+            'content':评论内容(string)
+        }
+    ]
+********************************************************************************
+功能:访问发现页面
+路由:/discover
+输入:null
+输出:发现页面(text/html)
+    {
+        'events':
+		[(size=8)
+			{
+				'title':事件名(string),
+				'value':热度(int),
+				'emotion':
+					{
+						'pos':赞成的比例(%),
+						'neu'中立的比例(%),
+						'neg':反对的比例(%)
+					},
+				'url':具体信息页面链接(string)
+			}
+		],
+        'total_leader':总排行榜
+		[(size=5)
+			{
+				'event':事件名(string),
+				'url':事件具体信息页面链接(string),
+				'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+			}
+		],
+		'political_leader':政治排行榜
+		[(size=5)
+			{
+				'event':事件名(string),
+				'url':事件具体信息页面链接(string),
+				'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+			}
+		],
+		'economic_leader':经济排行榜
+		[(size=5)
+			{
+				'event':事件名(string),
+				'url':事件具体信息页面链接(string),
+				'trend':变化趋势(enum[1(上升)/0(平稳)/-1(下降)])
+			}
+		]
+    }
+********************************************************************************
+功能:发现更多热点事件
+路由:忽略
+输入:page:页码  [POST]
+输出:
+    [(size=8)
+		{
+			'title':事件名(string),
+			'value':热度(int),
+			'emotion':
+				{
+					'pos':赞成的比例(%),
+					'neu'中立的比例(%),
+					'neg':反对的比例(%)
+				},
+			'url':具体信息页面链接(string)
+		}
+	]
+********************************************************************************
+功能:月度舆情报告
+路由:忽略
+输入:year:年  [POST]
+     month:月 [POST]
+输出:
+    [(size=5)
+		{
+			'title':事件名(string),
+			'value':热度(int),
+			'emotion':
+				{
+					'pos':赞成的比例(%),
+					'neu'中立的比例(%),
+					'neg':反对的比例(%)
+				},
+			'url':具体信息页面链接(string),
+			'keywords':
+				[(size=4)
+					{
+						'word':关键词,
+						'value':权值
+					}
+				],
+			'total_emotion':月度情感趋势
+				{
+					'pos':赞成的比例(%),
+					'neu'中立的比例(%),
+					'neg':反对的比例(%)
+				}
+		}
+	]
+********************************************************************************
+功能:年度舆情报告
+路由:忽略
+输入:year:年 [POST]
+输出:
+    [(size=5)
+		{
+			'title':事件名(string),
+			'value':热度(int),
+			'emotion':
+				{
+					'pos':赞成的比例(%),
+					'neu'中立的比例(%),
+					'neg':反对的比例(%)
+				},
+			'url':具体信息页面链接(string),
+			'keywords':
+				[(size=4)
+					{
+						'word':关键词,
+						'value':权值
+					}
+				],
+			'total_emotion':年度情感趋势
+				{
+					'pos':赞成的比例(%),
+					'neu'中立的比例(%),
+					'neg':反对的比例(%)
+				}
+		}
+	]
