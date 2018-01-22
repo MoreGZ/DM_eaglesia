@@ -33,7 +33,7 @@ class Ajax {
 		        withCredentials: true,
 		        validateStatus:(status)=>{
 		            return status >= 200 && status < 300;
-		        },
+		        }, 
 				...params
 			}
 			axios.request(axiosConfig)

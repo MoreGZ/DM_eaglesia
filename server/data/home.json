@@ -1,0 +1,6 @@
+[
+    {
+        "title":事件名(string),
+        "url": 具体信息页面链接(string)
+    }
+]

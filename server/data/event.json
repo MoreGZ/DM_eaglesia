@@ -1,6 +1,6 @@
 {
 	"title":"一带一路峰会",
-	"info":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo com modo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nasce tur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rho ncus sap ien nunc eget odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bib endum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
+	"info":"Lorem consectetur adipiscing elit. orci, sed rho ncus sap ien nunc eget Aenean ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo com modo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nasce tur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rho ncus sap ien nunc eget odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bib endum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
 	"rank":
     {
         "totalRank":
@@ -15,7 +15,7 @@
 			"trend":0
 		}
     },
-	"class": "社会",        
+	"class": ["社会","经济"],        
 	"total":23,                   
 	"track":                         
     [
@@ -62,7 +62,28 @@
             "source":"报道来源(string|domain)"
         }
     ],
-    "emotion":[30,20,50],
+    "emotion":[0.3,0.2,0.5],
+    "spe_emotion":
+    [
+        {
+            "word":"中国",
+            "pos":0.800,
+            "neu":0.100,
+            "neg":0.100
+        },
+        {
+            "word":"中国",
+            "pos":0.800,
+            "neu":0.100,
+            "neg":0.10
+        },
+        {
+            "word":"中国",
+            "pos":0.490,
+            "neu":0.310,
+            "neg":0.200
+        }
+    ],
     "trend_attitude": 
     [
         {
