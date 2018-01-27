@@ -130,6 +130,7 @@ class Event extends Component {
 	}
 	
 	initChart = () => {
+		// 态度比例
 		var emotion_chart_box =  ReactDOM.findDOMNode(this.refs.emotion_chart_box);
 		var data=[
             {value:335, name:'直接访问'},
@@ -139,6 +140,102 @@ class Event extends Component {
             {value:1548, name:'搜索引擎'}
         ];
 		charts.createEmotionChart(emotion_chart_box,data)
+		
+		
+		// 评价对象
+		var spe_emotion_chart_box1 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box1);
+		var spe_emotion_chart_box2 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box2);
+		var spe_emotion_chart_box3 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box3);
+		var data=[
+        ];
+		charts.createSpeEmotionChart(spe_emotion_chart_box1,data);
+		charts.createSpeEmotionChart(spe_emotion_chart_box2,data);
+		charts.createSpeEmotionChart(spe_emotion_chart_box3,data);
+		
+
+		// 态度趋势
+		var trend_attitude_chart_box = ReactDOM.findDOMNode(this.refs.trend_attitude_chart_box);
+		var data = [];
+		charts.createTrendAttitudeChart(trend_attitude_chart_box,data);
+
+		
+		// 热度趋势
+		var trend_value_chart_box = ReactDOM.findDOMNode(this.refs.trend_value_chart_box);
+		var data = [];
+		charts.createTrendValueChart(trend_value_chart_box,data);
+
+
+		// 全局关键词
+		var keywords_chart_box = ReactDOM.findDOMNode(this.refs.keywords_chart_box);
+		var keywords = {
+		    "visualMap": 22199,
+		    "continuous": 10288,
+		    "contoller": 620,
+		    "series": 274470,
+		    "gauge": 12311,
+		    "detail": 1206,
+		    "piecewise": 4885,
+		    "textStyle": 32294,
+		    "markPoint": 18574,
+		    "pie": 38929,
+		    "roseType": 969,
+		    "label": 37517,
+		    "emphasis": 12053,
+		    "yAxis": 57299,
+		    "name": 15418,
+		    "type": 22905,
+		    "gridIndex": 5146,
+		    "normal": 49487,
+		    "itemStyle": 33837,
+		    "min": 4500,
+		    "silent": 5744,
+		    "animation": 4840,
+		    "offsetCenter": 232,
+		    "inverse": 3706,
+		    "borderColor": 4812,
+		    "markLine": 16578,
+		    "line": 76970,
+		    "radiusAxis": 6704,
+		    "radar": 15964,
+		    "data": 60679,
+		    "dataZoom": 24347,
+		    "tooltip": 43420,
+		    "toolbox": 25222,
+		    "geo": 16904,
+		    "parallelAxis": 4029,
+		    "parallel": 5319,
+		    "max": 3393,
+		    "bar": 43066,
+		    "heatmap": 3110,
+		    "map": 20285,
+		    "animationDuration": 3425,
+		    "animationDelay": 2431,
+		    "splitNumber": 5175,
+		    "axisLine": 12738,
+		    "lineStyle": 19601,
+		    "splitLine": 7133,
+		    "axisTick": 8831,
+		    "axisLabel": 17516,
+		    "pointer": 590,
+		};
+		var data = [];
+		for (var name in keywords) {
+		    data.push({
+		        name: name,
+		        value: Math.sqrt(keywords[name])
+		    })
+		}
+		charts.createKeywordChart(keywords_chart_box,data);
+
+		// 正面高频词
+		var posWords_chart_box = ReactDOM.findDOMNode(this.refs.posWords_chart_box);
+		var data = [];
+		charts.createPoswordsChart(posWords_chart_box,data);
+
+		// 负面高频词
+		var negWords_chart_box = ReactDOM.findDOMNode(this.refs.negWords_chart_box);
+		var data = [];
+		charts.createNegwordsChart(negWords_chart_box,data);
 	}
 	/*
 	初始化数据
@@ -167,6 +264,8 @@ class Event extends Component {
 				"negWords":data.negWords,
 			    "news":data.news
 			})
+
+			this.initChart();
 		}catch(err){
 			console.error(err);
 		}
@@ -177,7 +276,7 @@ class Event extends Component {
 	}
 
 	componentDidMount(){
-		this.initChart();
+		
 		window.onscroll = this.showTag;
 	}
 
@@ -274,27 +373,34 @@ class Event extends Component {
 								</div>
 							</div>
 							<div className="spe_emotion">
-								<h5 className="module_title">评价对象</h5>
-								
+								<h5 className="module_title spe_emotion_title">评价对象</h5>
+								<div className="spe_emotion_chart_box1 chart_box" ref="spe_emotion_chart_box1"></div>
+								<div className="spe_emotion_chart_box2 chart_box" ref="spe_emotion_chart_box2"></div>
+								<div className="spe_emotion_chart_box3 chart_box" ref="spe_emotion_chart_box3"></div>
 							</div>
 						</div>
 						<div className="trend_attitude">
 							<h5 className="module_title">态度趋势</h5>
+							<div className="trend_attitude_chart_box" ref="trend_attitude_chart_box"></div>
 						</div>
-						<div className="trend_value ">
+						<div className="trend_value">
 							<h5 className="module_title">热度趋势</h5>
+							<div className="trend_value_chart_box" ref="trend_value_chart_box"></div>
 						</div>
 						<div className="comments">
 							<h5 className="module_title">印尼国民评论</h5>
 						</div>
 						<div className="keywords">
 							<h5 className="module_title">事件关键词</h5>
+							<div className="keywords_chart_box" ref="keywords_chart_box"></div>
 						</div>
 						<div className="posWords">
 							<h5 className="module_title">正面高频词</h5>
+							<div className="posWords_chart_box" ref="posWords_chart_box"></div>
 						</div>
 						<div className="negWords">
 							<h5 className="module_title">负面高频词</h5>
+							<div className="negWords_chart_box" ref="negWords_chart_box"></div>
 						</div>
 						<div className="news">
 							<h5 className="module_title">印尼媒体相关报道</h5>

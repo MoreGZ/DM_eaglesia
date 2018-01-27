@@ -187,20 +187,35 @@
 			.spe_emotion{
 				width: 560px;
 				height: 400px;
-				.module
+				.module;
+				.spe_emotion_title{
+					border-bottom: 1px solid #dbdbdb;
+				}
+				.chart_box{
+					height: 104px;
+					margin-left: 14px;
+					margin-right: 14px;
+					border-bottom: 1px solid #dbdbdb;
+				}
 			}
 		}
 		.trend_attitude{
 			float: left;
 			width: 1203px;
 			height: 532px;
-			.module
+			.module;
+			.trend_attitude_chart_box{
+				height: 420px;
+			}
 		}
 		.trend_value{
 			float: left;
 			width: 1203px;
 			height: 472px;
-			.module
+			.module;
+			.trend_value_chart_box{
+				height: 388px;
+			}
 		}
 		.comments{
 			float: left;
@@ -213,20 +228,30 @@
 			width: 361px;
 			height: 419px;
 			margin-right: 6px;
-			.module
+			.module;
+			.keywords_chart_box{
+				margin: 27px 36px;
+				height: 280px;
+			}
 		}
 		.posWords{
 			float: left;
 			width: 414px;
 			height: 419px;
 			margin-right: 6px;
-			.module
+			.module;
+			.posWords_chart_box{
+				height: 310px;
+			}
 		}
 		.negWords{
 			float: left;
 			width: 416px;
 			height: 419px;
-			.module
+			.module;
+			.negWords_chart_box{
+				height: 310px;
+			}
 		}
 		.news{
 			float: left;

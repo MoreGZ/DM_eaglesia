@@ -1,9 +1,9 @@
 import echarts from 'echarts';
+import echartsWordcloud from 'echarts-wordcloud';
 
 class ChartFatherFactory {
 	createChart(dom,option){
 		var chart = echarts.init(dom);
-		console.log(option);
 		chart.setOption(option);
 	}
 }
