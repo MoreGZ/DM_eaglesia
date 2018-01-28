@@ -227,10 +227,12 @@ class Event extends Component {
 		}
 		charts.createKeywordChart(keywords_chart_box,data);
 
+
 		// 正面高频词
 		var posWords_chart_box = ReactDOM.findDOMNode(this.refs.posWords_chart_box);
 		var data = [];
 		charts.createPoswordsChart(posWords_chart_box,data);
+
 
 		// 负面高频词
 		var negWords_chart_box = ReactDOM.findDOMNode(this.refs.negWords_chart_box);
@@ -388,7 +390,23 @@ class Event extends Component {
 							<div className="trend_value_chart_box" ref="trend_value_chart_box"></div>
 						</div>
 						<div className="comments">
-							<h5 className="module_title">印尼国民评论</h5>
+							<h5 className="module_title comments_title">印尼国民评论</h5>
+							<div className="text_flow_box">
+								{
+									this.state.comments.map((item,index)=>{
+										return (
+											<div className="text_flow" key={index}>
+												<h5 className="text_title">
+													{item.date}
+												</h5>
+												<div className="text_content">
+													<span className="username">{item.username}</span>:{item.content}
+												</div>
+											</div>
+										)
+									})
+								}
+							</div>
 						</div>
 						<div className="keywords">
 							<h5 className="module_title">事件关键词</h5>
@@ -403,7 +421,25 @@ class Event extends Component {
 							<div className="negWords_chart_box" ref="negWords_chart_box"></div>
 						</div>
 						<div className="news">
-							<h5 className="module_title">印尼媒体相关报道</h5>
+							<h5 className="module_title news_title">印尼媒体相关报道</h5>
+							<div className="text_flow_box text_flow_box_height">
+								{
+									this.state.news.map((item,index)=>{
+										return (
+											<div className="text_flow" key={index}>
+												<h5 className="text_title">
+													{item.title}
+													<span className="right">{item.date}</span>
+												</h5>
+												<div className="text_content">
+													<span className="username">报道摘要</span>:{item.body}
+												</div>
+												<p className="text_source">报道来源: {item.source}</p>
+											</div>
+										)
+									})
+								}
+							</div>
 						</div>
 					</div>
 

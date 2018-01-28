@@ -16,6 +16,7 @@ class RouteConfig extends Component{
 					<Route path="/event" component={Event}/>
 					<Route path="/found" component={Found}/>
 					<Route path="/" component={Home}/>
+					<Redirect to="/event"></Redirect>
 				</Switch>
 			</HashRouter>
 		)

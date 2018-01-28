@@ -5,7 +5,7 @@
 .header{
 	height: 80px;
 	width:100%;
-	background-color: @base-color1;
+	
 	.main{
 		width: 1210px;
 		height: 100%;
@@ -33,19 +33,19 @@
 		ul{
 			li{
 				float: left;
-				
 				a{
 					display: block;
 					width: 79px;
 					height: 100%; 
 					line-height: 80px;
 					font-size: 21px;
-					color:#fff;
+					
 					text-align: center;
 					transition: all 0.2s linear;
 				}
 				.active{
 					background: @base-color2;
+					color:#fff;
 					box-shadow: 0px 1px 5px 0px rgba(170, 170, 170, 0.75);
 				}
 			}
@@ -88,5 +88,23 @@
 			margin-top: 8px;
 			margin-right: 20px;
 		}
+	}
+}
+
+.status1{
+	background-color: @base-color1;
+	color:#fff;
+	a{
+		color:#fff;
+		
+	}
+}
+
+.status2{
+	background-color: #fff;
+	color:#333;
+	a{
+		color:#333;
+
 	}
 }
