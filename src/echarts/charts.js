@@ -568,6 +568,158 @@ class chartFactory extends ChartFatherFactory{
 		};
 		this.createChart(dom,option);
 	}
+
+	// 态度比例_搜索页面
+	searchCreateEmotionChart(dom,data){
+		var option = {
+		    tooltip : {
+	        trigger: 'item',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        },
+		        textStyle:{
+		          color:"#626b7a",
+		          fontSize:21,
+		        },
+		        backgroundColor:"none",
+		        formatter:"{c}",
+		        position:  ['4%', '26%'],
+		        enterable:true
+		    },
+		    grid: {
+		        left: '10%',
+		        right: '4%',
+		        top:"10%",
+		        containLabel: true
+		    },
+		    xAxis:  {
+		        axisLine: {show:false},
+		        axisTick: {show:false},
+		        axisLabel: {show:false},
+		        splitArea: {show:false},
+		        splitLine: {show:false},
+		        type: 'value'
+		    },
+		    yAxis: {
+		        type: 'category',
+		        axisLine: {show:false},
+		        axisTick: {show:false},
+		        axisLabel: {show:false},
+		        splitArea: {show:false},
+		        splitLine: {show:false},
+		        data: ['中国']
+		    },
+		    color:['#a0b9e5','#b0b0b0', '#d68592'],
+		    series: [
+		        {
+		            type: 'bar',
+		            barWidth: 32,
+		            barGap:"-100%",
+		            itemStyle:{
+		                normal: {
+		                    color:"#fff",
+		                    show: true,
+		                    barBorderRadius: [30, 30, 30, 30],
+		                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+		                    shadowOffsetY:5,
+		                    shadowBlur: 30,
+		                },
+		                emphasis:{
+		                }
+		                
+		            },
+		            data: [100]
+		        },
+		        {
+		            name: '赞成',
+		            type: 'bar',
+		            stack: "中国",
+		            barWidth: 32,
+		            itemStyle:{
+		                normal: {
+		                    show: true,
+		                    barBorderRadius: [190, 0, 0, 190],
+		                },
+		                emphasis:{
+		                    color:'#a0b9e5',
+		                    borderWidth:"5", 
+		                    borderColor:'#a0b9e5',
+		                }
+		            },
+		            label: {      
+		                normal: {
+		                    show: true,
+		                    fontSize:"16",
+		                    position: 'top',
+		                    formatter: "{a}"
+		                },
+		                emphasis:{
+		                   fontSize:"20", 
+		                }
+		            },
+		            data: [32]
+		        },
+		        {
+		            name: '中立',
+		            type: 'bar',
+		            stack: '中国',
+		            itemStyle:{
+		                normal: {
+		                    show: true,
+		                },
+		                emphasis:{
+		                    color:'#b0b0b0',
+		                    borderWidth:"5", 
+		                    borderColor:'#b0b0b0',
+		                }
+		                
+		            },
+		            label: {
+		                normal: {
+		                    show: true,
+		                    fontSize:"16",
+		                    position: 'top',
+		                    formatter: "{a}"
+		                },
+		                emphasis:{
+		                   fontSize:"20", 
+		                }
+		            },
+		            data: [18]
+		        },
+		        {
+		            name: '反对',
+		            type: 'bar',
+		            stack: '中国',
+		            itemStyle:{
+		                normal: {
+		                    show: true,
+		                    barBorderRadius: [0, 30, 30, 0],
+		                },
+		                emphasis:{
+		                    color:'#d68592',
+		                    borderWidth:"5", 
+		                    borderColor:'#d68592',
+		                }
+		                
+		            },
+		            label: {
+		                normal: {
+		                    show: true,
+		                    position: 'top',
+		                    fontSize:"16",
+		                    formatter: "{a}"
+		                },
+		                emphasis:{
+		                   fontSize:"20", 
+		                }
+		            },
+		            data: [50]
+		        },
+		    ]
+		};
+		this.createChart(dom,option);
+	}
 }
 
 export default new chartFactory

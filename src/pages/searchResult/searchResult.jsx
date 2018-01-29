@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import {NavLink} from 'react-router-dom'
 
 import Api from '@/api/api.js'
+import charts from '@/echarts/charts.js'
 
-import PublicHeader from '@/components/header/header';
+import PublicHeader from '@/components/header/header'
+import PublicRank from '@/components/rank/rank'
 
-import './searchResult.css';
+import './searchResult.css'
 
 class SearchResult extends Component {
 	
@@ -60,15 +63,15 @@ class SearchResult extends Component {
 	    "leader": [
 	        {
 	            "title": "马丽哈路口车祸",
-	            "trend": 1
+	            "trend": 0
 	        },
 	        {
 	            "title": "Thai rice prices plummeted",
-	            "trend": 1
+	            "trend": -1
 	        },
 	        {
 	            "title": "Samsung market crisis",
-	            "trend": 1
+	            "trend": 0
 	        },
 	        {
 	            "title": "沙巴政党问题",
@@ -80,11 +83,11 @@ class SearchResult extends Component {
 	        },
 	        {
 	            "title": "净选盟集会",
-	            "trend": 1
+	            "trend": -1
 	        },
 	        {
 	            "title": "巫统代表大会",
-	            "trend": 1
+	            "trend": -1
 	        },
 	        {
 	            "title": "政府刑法法案",
@@ -92,12 +95,32 @@ class SearchResult extends Component {
 	        }
 	    ]
 	}
+	
+	initData = () => {
+
+	}
+
+	initChart = () => {
+		this.state.results.forEach((item,index) => {
+			var chart_box = ReactDOM.findDOMNode(this.refs["chart_box"+(index+1)]);
+			var data = item.emotion;
+			charts.searchCreateEmotionChart(chart_box,data);
+		})
+	}
+
+	componentWillMount(){
+		// this.initChart();
+	}
+	
+	componentDidMount(){
+		this.initChart();
+	}
 
 	render() {
 		var outputHotValue = (value) => {
 			var dom = [];
 			for (var i=0;i<value;i++){
-				dom.push(<img src="./img/hotvalue.png" alt=""/>)
+				dom.push(<img src="./img/hotvalue.png" alt="" key={i}/>)
 			}
 
 			return dom;
@@ -105,21 +128,20 @@ class SearchResult extends Component {
 
 		return (
 			<div className="searchResult">
-				<div className="header_wrapper">
-					<PublicHeader></PublicHeader>
-				</div>
 				<div className="body">
 					<div className="left">
 						<div className="events">
 							{
 								this.state.results.map((item,index) => {
 									return (
-										<div className="event">
+										<div className="event" key={index}>
 											<div className="top">
-												<h5 className="event_title">{item.title}</h5>
+												<NavLink to="/event">
+													<h5 className="event_title">{item.title}</h5>
+												</NavLink>
 												<div className="hot">
 													<img src="./img/hoticon.png" alt=""/>
-													热度: 
+													<span>热度: </span> 
 													{
 														outputHotValue(item.value).map((item,index) => {
 															return item
@@ -127,14 +149,19 @@ class SearchResult extends Component {
 													}
 												</div>
 											</div>
-											<div className="chart" ref={"chart"+(index+1)}></div>
+											<div className="chart_box" ref={"chart_box"+(index+1)}></div>
 										</div>
 									)
 								})
 							}
 						</div>
 					</div>
-					<div className="right"></div>
+					<div className="right">
+						<PublicRank list={this.state.leader}></PublicRank>
+					</div>
+				</div>
+				<div className="header_wrapper">
+					<PublicHeader></PublicHeader>
 				</div>
 			</div>
 		);

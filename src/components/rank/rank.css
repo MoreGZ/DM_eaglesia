@@ -1,0 +1,33 @@
+.rank{
+	color:#474e59;
+	.title{
+		font-size: 25px;
+		height: 73px;
+		line-height: 73px;
+		border-bottom: 1px solid #dbdbdb;
+		padding-left: 37px;
+	}
+	.list{
+		margin:15px  37px 15px  37px;
+		.item{
+			width: 100%;
+			font-size: 16px;
+			/*margin-bottom: 15px;*/
+			line-height: 35px;
+			.index{
+				/*float: left;*/
+			}
+			.content{
+				display: inline-block;
+				width: 190px;
+				vertical-align: top;
+				color:#474e59;
+				/*float: left;*/
+			}
+			.trend{
+				/*float: right;*/
+				vertical-align: middle;
+			}
+		}
+	}
+}
