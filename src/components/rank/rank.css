@@ -1,5 +1,7 @@
 .rank{
 	color:#474e59;
+	background: #fefefe;
+	padding-bottom: 10px;
 	.title{
 		font-size: 25px;
 		height: 73px;

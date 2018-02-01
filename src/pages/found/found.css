@@ -1,0 +1,27 @@
+.found{
+	background: #e8e8e8;
+	min-height: 100%;
+	overflow: auto;
+	.header_wrapper{
+		position: fixed;
+		top:0;
+		width: 100%;
+	}
+	.body{
+		width: 1200px;
+		margin:120px auto auto auto;
+		overflow: auto;		
+		.left{
+			float: left;
+			width: 892px;
+			background: #fefefe;
+			box-shadow: 0px 4px 5px 0px rgba(218, 218, 218, 0.75);
+		}
+		.right{
+			float: right;
+			.rank_a{
+				margin-bottom: 12px;
+			}
+		}
+	}
+}

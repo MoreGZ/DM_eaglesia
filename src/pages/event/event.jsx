@@ -278,7 +278,6 @@ class Event extends Component {
 	}
 
 	componentDidMount(){
-		
 		window.onscroll = this.showTag;
 	}
 
