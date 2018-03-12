@@ -7,6 +7,8 @@ import charts from '@/echarts/charts.js'
 
 import PublicHeader from '@/components/header/header'
 import PublicRank from '@/components/rank/rank'
+import EventList from '@/components/event_list/event_list'
+import EventItem from '@/components/event_item/event_item'
 
 import './searchResult.css'
 
@@ -100,60 +102,21 @@ class SearchResult extends Component {
 
 	}
 
-	initChart = () => {
-		this.state.results.forEach((item,index) => {
-			var chart_box = ReactDOM.findDOMNode(this.refs["chart_box"+(index+1)]);
-			var data = item.emotion;
-			charts.searchCreateEmotionChart(chart_box,data);
-		})
-	}
-
 	componentWillMount(){
-		// this.initChart();
+		
 	}
 	
 	componentDidMount(){
-		this.initChart();
+		
 	}
 
 	render() {
-		var outputHotValue = (value) => {
-			var dom = [];
-			for (var i=0;i<value;i++){
-				dom.push(<img src="./img/hotvalue.png" alt="" key={i}/>)
-			}
-
-			return dom;
-		}
-
 		return (
 			<div className="searchResult">
 				<div className="body">
 					<div className="left">
 						<div className="events">
-							{
-								this.state.results.map((item,index) => {
-									return (
-										<div className="event" key={index}>
-											<div className="top">
-												<NavLink to="/event">
-													<h5 className="event_title">{item.title}</h5>
-												</NavLink>
-												<div className="hot">
-													<img src="./img/hoticon.png" alt=""/>
-													<span>热度: </span> 
-													{
-														outputHotValue(item.value).map((item,index) => {
-															return item
-														})
-													}
-												</div>
-											</div>
-											<div className="chart_box" ref={"chart_box"+(index+1)}></div>
-										</div>
-									)
-								})
-							}
+							<EventList events={this.state.results}></EventList>
 						</div>
 					</div>
 					<div className="right">
@@ -168,4 +131,4 @@ class SearchResult extends Component {
 	}
 }
 
-export default SearchResult;
+export default SearchResult

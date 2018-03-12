@@ -1,0 +1,38 @@
+.event{
+	margin-left: 25px;
+	margin-right: 37px;
+	border-bottom: 1px solid #dbdbdb;
+	.top{
+		line-height: 72px;
+		width: 100%;
+		color:#474e59;
+		overflow: auto;
+		.event_title{
+			float: left;
+			font-size: 25px;
+			font-weight: 500;
+			color:#474e59; 
+		}
+		.hot{
+			float: right;
+			margin-right: 37px;
+			width: 196px;
+			span{
+				display: inline-block;
+				font-size: 21px;
+				margin-right: 17px;
+			}
+			img{
+				margin-right: 5px;
+				vertical-align: middle;
+				position: relative;
+				top:-4px;
+			}
+		}
+	}
+	.chart_box{
+		/*background: red;*/
+		width:100%;
+		height: 180px;
+	}
+}

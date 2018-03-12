@@ -1,0 +1,42 @@
+#report{
+	.time_choose{
+		.time_choose_title{
+			padding:22px 25px;
+			font-size: 29px;
+			font-weight: 500;
+			color: #474e59;
+		}
+	}
+	.report_title{
+		padding:22px 25px;
+		font-size: 25px;
+		font-weight: 500;
+		color: #474e59;
+	}
+	.keyword{
+		overflow: auto;
+		.graph_chart {
+			float: left;
+			width:50%;
+			height: 520px;
+		}
+	}
+	.emotion_trend{
+		margin-left: 25px;
+		margin-right: 37px;
+		border-bottom: 1px solid #dbdbdb;
+		.top{
+			line-height: 72px;
+			width: 100%;
+			color:#474e59;
+			overflow: auto;
+			font-size: 25px;
+			font-weight: 500;
+			color:#474e59; 
+		}
+		.emotion_trend_chart{
+			width:100%;
+			height: 180px;
+		}
+	}
+}

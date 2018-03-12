@@ -720,6 +720,87 @@ class chartFactory extends ChartFatherFactory{
 		};
 		this.createChart(dom,option);
 	}
+
+	// 图谱
+	keywordGraph(dom,data){
+		var option = {
+		    title: {
+		        text: 'Graph 简单示例'
+		    },
+		    tooltip: {},
+		    animationDurationUpdate: 1500,
+		    animationEasingUpdate: 'quinticInOut',
+		    series : [
+		        {
+		            type: 'graph',
+		            layout: 'none',
+		            roam: true,
+		            label: {
+		                normal: {
+		                    show: true
+		                }
+		            },
+		            edgeSymbol: ['circle'],
+		            edgeSymbolSize: [4, 10],
+		            edgeLabel: {
+		                normal: {
+		                    textStyle: {
+		                        fontSize: 20
+		                    }
+		                }
+		            },
+		            data: [{
+		                name: '节点1',
+		                x: 200,
+		                y: 250,
+		                symbolSize: [70,70]
+		            }, {
+		                name: '节点2',
+		                x: 500,
+		                y: 250,
+		                symbolSize: [100,100]
+		            }, {
+		                name: '节点3',
+		                x: 350,
+		                y: 100,
+		                symbolSize: [70,70]
+		            }, {
+		                name: '节点4',
+		                x: 350,
+		                y: 400,
+		                symbolSize: [70,70]
+		            }, {
+		                name: '节点5',
+		                x: 350,
+		                y: 250,
+		                symbolSize: [146,146]
+		            }],
+		            // links: [],
+		            links: [{
+		                source: '节点1',
+		                target: '节点5'
+		            }, {
+		                source: '节点2',
+		                target: '节点5'
+		            }, {
+		                source: '节点3',
+		                target: '节点5'
+		            }, {
+		                source: '节点4',
+		                target: '节点5'
+		            }],
+		            lineStyle: {
+		                normal: {
+		                    opacity: 0.9,
+		                    width: 2,
+		                    curveness: 0
+		                }
+		            }
+		        }
+		    ]
+		};
+		this.createChart(dom,option);
+	}
 }
 
 export default new chartFactory
