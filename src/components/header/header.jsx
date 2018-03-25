@@ -1,12 +1,21 @@
 import React, { Component } from "react"
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import './header.css'
 
 
 class Header extends Component {
 	static defaultProps = {
-        status: 1
+        status: 1,
     }
+
+    state = {
+    	keyword:"",
+    }
+	
+	inputKeyword = (e) => {
+		var value = e.target.value;
+		this.setState({keyword:value});
+	}
 
 	render(){
 		return (
@@ -31,8 +40,10 @@ class Header extends Component {
 						? (
 							<div className="searchbox">
 								<form action="">
-									<input type="text" placeholder="请输入关键字进行搜索"/>
-									<button></button>
+									<input type="text" placeholder="请输入关键字进行搜索" onInput={this.inputKeyword}/>
+									<Link to={"/searchResult/"+this.state.keyword}>
+										<button></button>
+									</Link>
 									<img src="./img/search.png" alt="" className="icon"/>
 								</form>
 							</div>

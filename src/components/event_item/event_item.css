@@ -1,7 +1,8 @@
 .event{
-	margin-left: 25px;
-	margin-right: 37px;
+	padding-left: 25px;
+	padding-right: 37px;
 	border-bottom: 1px solid #dbdbdb;
+	background: #fefefe;
 	.top{
 		line-height: 72px;
 		width: 100%;

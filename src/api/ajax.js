@@ -25,19 +25,30 @@ class Ajax {
 			axiosConfig = {
 				url,
 				method,
-				baseURL:config.baseURL,
+				baseURL:"http://120.77.8.210/api2.0",
 				timeout:30000,
 				params: null,
 		        data: null,
-		        headers: null,
-		        withCredentials: true,
+		        headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+		        withCredentials: false,
 		        validateStatus:(status)=>{
 		            return status >= 200 && status < 300;
 		        }, 
+		        transformRequest: [function (data) {
+					// 对 data 进行任意转换处理
+					let formData = new FormData();
+					for(let key in data){
+						formData.append(key,data[key])
+					}
+					return formData;
+				}],
 				...params
 			}
 			axios.request(axiosConfig)
 			.then(res=>{
+				// console.log(res);
 				var data = typeof res.data === "object" ? res.data : JSON.parse(res.data);
 				resolse(res);
 			},err=>{

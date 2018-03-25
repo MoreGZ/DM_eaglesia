@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 import Api from '@/api/api.js'
 
@@ -10,23 +10,8 @@ import './home.css';
 class Home extends Component {
 
 	state = {
-		events:[
-		    {
-		        "title": "Thai rice prices plummeted"
-		    },
-		    {
-		        "title": "Samsung market crisis"
-		    },
-		    {
-		        "title": "马丽哈路口车祸"
-		    },
-		    {
-		        "title": "印尼凶杀案频发"
-		    },
-		    {
-		        "title": "沙巴政党问题"
-		    }
-		]
+		events:[],
+		keyword:"",
 	}
 	/*
 	初始化数据
@@ -35,17 +20,27 @@ class Home extends Component {
 	*/
 	initData = async () => {
 		try{
+			var result = await Api.getHomeData();
+			var data = result.data;
+			this.setState({
+				events:data,
+			})
 		}catch(err){
 			console.error(err);
 		}
 	}
 	
+	inputKeyword = (e) => {
+		var value = e.target.value;
+		this.setState({keyword:value});
+	}
+
 	componentWillMount(){
-		this.initData();
+
 	}
 
 	componentDidMount(){
-		
+		this.initData();
 	}
 
 	render() {
@@ -64,8 +59,10 @@ class Home extends Component {
 						</div>
 						<div className="searchbox">
 							<form action="">
-								<input type="text" placeholder="请输入关键字进行搜索"/>
-								<button></button>
+								<input type="text" placeholder="请输入关键字进行搜索" onInput={this.inputKeyword}/>
+								<Link to={"/searchResult/"+this.state.keyword}>
+									<button></button>
+								</Link>
 								<img src="./img/search.png" alt="" className="icon"/>
 							</form>
 						</div>
@@ -73,8 +70,8 @@ class Home extends Component {
 							{
 								this.state.events.map((item,index) => {
 									return (
-										<Link to="/event">
-											<div className={"event event"+(index+1)}>
+										<Link to={"/event/"+item.title} key={index} target="_blank">
+											<div className={"event_box event"+(index+1)}>
 												<span className="title">{item.title}</span>
 											</div>
 										</Link>
@@ -87,8 +84,6 @@ class Home extends Component {
 			</div>
 		);
 	}
-
-
 }
 
 export default Home;

@@ -7,7 +7,7 @@
 	box-shadow: 0px 4px 5px 0px rgba(218, 218, 218, 0.75),
 }
 .Ellipsis(){
-
+	
 }
 .Event{
 	background: #e8e8e8;
@@ -130,6 +130,7 @@
 				float: left;
 				width: 268px;
 				height: 342px;
+				padding-bottom: 0px;
 				.module;
 				.rank_main{
 					padding-left: 38px;
@@ -163,7 +164,65 @@
 				width: 637px;
 				height: 938px;
 				margin-right: 6px;
-				.module
+				.module;
+				.track_main{
+					height: 820px;
+					position: relative;
+					overflow: auto;
+					.line{
+						width: 1px;
+						height: 0px;
+						position: absolute;
+						left: 50%;
+						margin-left: -20px;
+						background: #c9c9c9;
+						transition: all linear 0.4s;
+					}
+					.circle{
+						width: 12px;
+					    height: 12px;
+					    background-color: #fff;
+					    margin: 0 auto 44px auto;
+					    overflow: visible;
+					    position: relative;
+					    left: -20px;
+					    box-shadow: 0 0 20px rgba(0,0,0,.4);
+					    border-radius: 50px;
+					    margin-bottom: 85px;
+					    margin-top:5px;
+					    article{
+					    	width: 202px;
+						    height: 100px;
+						    position: absolute;
+						    top: 0;
+						    overflow: hidden;
+						    font-size: 14px;
+						    line-height: 23px;
+						    top:-4px;
+					    }
+					    .article_left{
+							text-align: right;
+							left: -216px;
+					    }
+					    .article_right{
+							text-align: left;
+							left: 25px;
+					    }
+					}
+				}
+				.track_main::-webkit-scrollbar {
+					 display: none;
+				}
+				.track_main::-webkit-scrollbar-button{
+					display: none;
+				}
+				.track_main::-webkit-scrollbar-track{
+					background:#fff;
+				}
+				.track_main::-webkit-scrollbar-thumb{
+					 background:#dedfe2;
+		       		 border-radius:10px;
+				}
 			}
 			.emotion_spe_emotion_box{
 				float: left;
@@ -215,7 +274,7 @@
 			.comments{
 				float: left;
 				width: 1203px;
-				height: 568px;
+				height: 560px;
 				.module;
 				.comments_title{
 					border-bottom: 1px solid #dbdbdb;
@@ -254,11 +313,25 @@
 			.news{
 				float: left;
 				width: 1202px;
-				height: 665px;
+				height: 690px;
+
 				.module;
 				.news_title{
 					border-bottom: 1px solid #dbdbdb;
 				}
+			}
+			.text_flow_box::-webkit-scrollbar {
+			 width:10px;
+			}
+			.text_flow_box::-webkit-scrollbar-button{
+				display: none;
+			}
+			.text_flow_box::-webkit-scrollbar-track{
+				background:#fff;
+			}
+			.text_flow_box::-webkit-scrollbar-thumb{
+				 background:#dedfe2;
+	       		 border-radius:10px;
 			}
 			.module_title{
 				height: 83px;
@@ -307,7 +380,20 @@
 			.text_flow_box_height{
 				height: 580px;
 			}
+			.loadMoreBtn{
+				width: 100%;
+				height: 25px;
+				line-height: 25px;
+				font-size: 14px;
+				background-color: #b0b0b0;
+				color: #f2f2f2;
+				text-align: center;
+				cursor: pointer;
+			}
 		}
+	}
+	.hidden_detail{
+		display: none;
 	}
 }
 

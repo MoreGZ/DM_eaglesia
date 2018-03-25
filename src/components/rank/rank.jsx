@@ -5,7 +5,7 @@ import './rank.css'
 
 class Rank extends Component {
 	static defaultProps = {
-		title:"热点搜素榜",
+		title:"热点搜索",
         list:[]
     }
 
@@ -21,7 +21,7 @@ class Rank extends Component {
 							return (
 								<div className="item" key={index}>
 									<span className="index">{index+1}.</span>
-									<NavLink to="/event">
+									<NavLink to={"/event/"+item.title} target="_blank">
 										<span className="content">{item.title}</span>
 									</NavLink>
 									{

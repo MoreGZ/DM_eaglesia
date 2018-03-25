@@ -3,8 +3,14 @@ import ChartFatherFactory from './chart.js'
 class chartFactory extends ChartFatherFactory{
 	// 态度比例
 	createEmotionChart(dom,data){
-		var option = {};
-		option = {
+		let data1=[
+            {value:data[0], name:'赞成'},
+            {value:data[1], name:'中立'},
+            {value:data[2], name:'反对'}
+        ];
+        console.log(data1);
+		let option = {
+			color:['#a0b9e5','#b0b0b0', '#d68592'],
 		    tooltip: {
 		        trigger: 'item',
 		        formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -12,11 +18,10 @@ class chartFactory extends ChartFatherFactory{
 		    legend: {
 		        orient: 'vertical',
 		        x: 'left',
-		        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+		        data:['赞成','中立','反对']
 		    },
 		    series: [
 		        {
-		            name:'访问来源',
 		            type:'pie',
 		            radius: ['50%', '70%'],
 		            avoidLabelOverlap: false,
@@ -38,7 +43,7 @@ class chartFactory extends ChartFatherFactory{
 		                    show: false
 		                }
 		            },
-		            data:data
+		            data:data1
 		        }
 		    ]
 		};
@@ -49,7 +54,7 @@ class chartFactory extends ChartFatherFactory{
 	createSpeEmotionChart(dom,data){
 		var option = {
 			title: {
-		        text: '中国',
+		        text: data.word,
 		        color:"#626b7a",
 		        textStyle:{
 		            fontSize:21,
@@ -113,12 +118,12 @@ class chartFactory extends ChartFatherFactory{
 		                }
 		                
 		            },
-		            data: [100]
+		            data: [1]
 		        },
 		        {
 		            name: '赞成',
 		            type: 'bar',
-		            stack: "中国",
+		            stack: data.word,
 		            barWidth: 14,
 		            itemStyle:{
 		                normal: {
@@ -142,12 +147,12 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"17", 
 		                }
 		            },
-		            data: [32]
+		            data: [data.pos]
 		        },
 		        {
 		            name: '中立',
 		            type: 'bar',
-		            stack: '中国',
+		            stack: data.word,
 		            itemStyle:{
 		                normal: {
 		                    show: true,
@@ -170,12 +175,12 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"17", 
 		                }
 		            },
-		            data: [18]
+		            data: [data.neu]
 		        },
 		        {
 		            name: '反对',
 		            type: 'bar',
-		            stack: '中国',
+		            stack: data.word,
 		            itemStyle:{
 		                normal: {
 		                    show: true,
@@ -199,7 +204,7 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"17", 
 		                }
 		            },
-		            data: [50]
+		            data: [data.neg]
 		        },
 		    ]
 		};
@@ -208,6 +213,13 @@ class chartFactory extends ChartFatherFactory{
 
 	// 态度趋势
 	createTrendAttitudeChart(dom,data){
+		let date=[],pos=[],neu=[],neg=[];
+		data.forEach((d)=>{
+			date.push(d.date);
+			pos.push(d.pos);
+			neu.push(d.neu);
+			neg.push(d.neg);
+		})
 		var option = {
 		    tooltip: {
 		        trigger: 'item'
@@ -248,7 +260,7 @@ class chartFactory extends ChartFatherFactory{
 		                color:"#f5f5f5"
 		            }
 		        },
-		        data: ['2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16']
+		        data: date
 		    },
 		    yAxis: {
 		    	name:"态度占比",
@@ -295,7 +307,7 @@ class chartFactory extends ChartFatherFactory{
 		                    width:3,
 		                }
 		            },
-		            data:[120, 132, 101, 134, 90, 230, 210]
+		            data:pos
 		        },
 		        {
 		            name:'中立',
@@ -313,7 +325,7 @@ class chartFactory extends ChartFatherFactory{
 		                    width:3,
 		                }
 		            },
-		            data:[220, 182, 191, 234, 290, 330, 310]
+		            data:neu
 		        },
 		        {
 		            name:'反对',
@@ -331,7 +343,7 @@ class chartFactory extends ChartFatherFactory{
 		                    width:3,
 		                }
 		            },
-		            data:[150, 232, 201, 154, 190, 330, 410]
+		            data:neg
 		        }
 		    ]
 		};
@@ -340,6 +352,16 @@ class chartFactory extends ChartFatherFactory{
 
 	// 热度趋势
 	createTrendValueChart(dom,data){
+		let date=[],
+			value=[],
+			title=[],
+			id=[];
+		data.forEach((d)=>{
+			date.push(d.date);
+			value.push(d.value);
+			title.push(d.title);
+			id.push(d.id);
+		})
 		var option = {
 		    tooltip: {
 		        trigger: 'item'
@@ -376,7 +398,7 @@ class chartFactory extends ChartFatherFactory{
 		                color:"#f5f5f5"
 		            }
 		        },
-		        data: ['2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16','2017.6.16']
+		        data: date
 		    },
 		    yAxis: {
 		    	name:"态度占比",
@@ -423,7 +445,7 @@ class chartFactory extends ChartFatherFactory{
 		                    width:3,
 		                }
 		            },
-		            data:[120, 132, 101, 134, 90, 230, 210]
+		            data:value
 		        }
 		    ]
 		};
@@ -432,6 +454,13 @@ class chartFactory extends ChartFatherFactory{
 
 	// 全局关键词
 	createKeywordChart(dom,data){
+		let keywords = [];
+		data.forEach((d)=>{
+			let x = {};
+			x.name = d.word;
+			x.value = d.value;
+			keywords.push(x);
+		})
 		var option = {
 		    backgroundColor: '#F7F7F7',
 		    series: [{
@@ -462,7 +491,7 @@ class chartFactory extends ChartFatherFactory{
 		                shadowColor: '#333'
 		            }
 		        },
-		        data: data
+		        data: keywords
 		    }]
 		};
 		this.createChart(dom,option);
@@ -470,6 +499,13 @@ class chartFactory extends ChartFatherFactory{
 
 	// 正面高频词
 	createPoswordsChart(dom,data){
+		let word = [],
+			value = [];
+
+		data.forEach((d)=>{
+			word.push(d.word);
+			value.push(d.value);
+		})
 		var option = {
 		    color: ['#d68592'],
 		    tooltip : {
@@ -491,7 +527,7 @@ class chartFactory extends ChartFatherFactory{
 		        splitArea: {show:false},
 		        splitLine: {show:false},
 		        type : 'category',
-		        data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Sun'],
+		        data : word,
 		        axisTick: {
 		            alignWithLabel: true
 		        }
@@ -509,7 +545,7 @@ class chartFactory extends ChartFatherFactory{
 		            name:'直接访问',
 		            type:'bar',
 		            barWidth: '60%',
-		            data:[200, 189, 173, 164, 100, 89, 40, 40]
+		            data:value
 		        }
 		    ]
 		};
@@ -518,6 +554,13 @@ class chartFactory extends ChartFatherFactory{
 
 	// 负面高频词
 	createNegwordsChart(dom,data){
+		let word = [],
+			value = [];
+
+		data.forEach((d)=>{
+			word.push(d.word);
+			value.push(d.value);
+		})
 		var option = {
 		    color: ['#a0b9e5'],
 		    tooltip : {
@@ -544,7 +587,7 @@ class chartFactory extends ChartFatherFactory{
 		        splitArea: {show:false},
 		        splitLine: {show:false},
 		        type : 'category',
-		        data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Sun'],
+		        data : word,
 		        axisTick: {
 		            alignWithLabel: true
 		        }
@@ -562,7 +605,7 @@ class chartFactory extends ChartFatherFactory{
 		            name:'直接访问',
 		            type:'bar',
 		            barWidth: '60%',
-		            data:[200, 189, 173, 164, 100, 89, 40, 40]
+		            data:value
 		        }
 		    ]
 		};
@@ -571,6 +614,7 @@ class chartFactory extends ChartFatherFactory{
 
 	// 态度比例_搜索页面
 	searchCreateEmotionChart(dom,data){
+		console.log(data["pos"]);
 		var option = {
 		    tooltip : {
 	        trigger: 'item',
@@ -628,7 +672,7 @@ class chartFactory extends ChartFatherFactory{
 		                }
 		                
 		            },
-		            data: [100]
+		            data: [1]
 		        },
 		        {
 		            name: '赞成',
@@ -657,7 +701,7 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"20", 
 		                }
 		            },
-		            data: [32]
+		            data: [data["pos"]]
 		        },
 		        {
 		            name: '中立',
@@ -685,7 +729,7 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"20", 
 		                }
 		            },
-		            data: [18]
+		            data:[data["neu"]]
 		        },
 		        {
 		            name: '反对',
@@ -714,7 +758,7 @@ class chartFactory extends ChartFatherFactory{
 		                   fontSize:"20", 
 		                }
 		            },
-		            data: [50]
+		            data: [data["neg"]]
 		        },
 		    ]
 		};
@@ -724,10 +768,6 @@ class chartFactory extends ChartFatherFactory{
 	// 图谱
 	keywordGraph(dom,data){
 		var option = {
-		    title: {
-		        text: 'Graph 简单示例'
-		    },
-		    tooltip: {},
 		    animationDurationUpdate: 1500,
 		    animationEasingUpdate: 'quinticInOut',
 		    series : [
@@ -750,44 +790,64 @@ class chartFactory extends ChartFatherFactory{
 		                }
 		            },
 		            data: [{
-		                name: '节点1',
-		                x: 200,
+		                name: data.keywords[0].word,
+		                x: 250,
 		                y: 250,
-		                symbolSize: [70,70]
+		                symbolSize: [70,70],
+		                itemStyle:{
+			            	color:"#aca0c4",
+			            },
+		                color:"#aca0c4"
 		            }, {
-		                name: '节点2',
-		                x: 500,
+		                name: data.keywords[1].word,
+		                x: 450,
 		                y: 250,
-		                symbolSize: [100,100]
+		                symbolSize: [100,100],
+		                itemStyle:{
+			            	color:"#bbcdec",
+			            },
+		                color:"#bbcdec"
 		            }, {
-		                name: '节点3',
+		                name: data.keywords[2].word,
 		                x: 350,
-		                y: 100,
-		                symbolSize: [70,70]
+		                y: 150,
+		                symbolSize: [70,70],
+		                itemStyle:{
+			            	color:"#a0b9e5",
+			            },
+		                color:"#a0b9e5"
 		            }, {
-		                name: '节点4',
+		                name: data.keywords[3].word,
 		                x: 350,
-		                y: 400,
-		                symbolSize: [70,70]
+		                y: 350,
+		                symbolSize: [70,70],
+		                itemStyle:{
+			            	color:"#7999d2",
+			            },
+		                color:"#7999d2"
 		            }, {
-		                name: '节点5',
+		                name: data.title,
 		                x: 350,
 		                y: 250,
-		                symbolSize: [146,146]
+		                symbolSize: [146,146],
+		                itemStyle:{
+			            	color:"#a0b9e5",
+			            },
+		                color:"#a0b9e5"
 		            }],
 		            // links: [],
 		            links: [{
-		                source: '节点1',
-		                target: '节点5'
+		                source: data.keywords[0].word,
+		                target: data.title
 		            }, {
-		                source: '节点2',
-		                target: '节点5'
+		                source: data.keywords[1].word,
+		                target: data.title
 		            }, {
-		                source: '节点3',
-		                target: '节点5'
+		                source: data.keywords[2].word,
+		                target: data.title
 		            }, {
-		                source: '节点4',
-		                target: '节点5'
+		                source: data.keywords[3].word,
+		                target: data.title
 		            }],
 		            lineStyle: {
 		                normal: {

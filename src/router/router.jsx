@@ -12,8 +12,8 @@ class RouteConfig extends Component{
 			<HashRouter>
 				<Switch>
 					<Route path="/home" component={Home}/>
-					<Route path="/searchResult" component={SearchResult}/>
-					<Route path="/event" component={Event}/>
+					<Route path="/searchResult/:keyword" component={SearchResult}/>
+					<Route path="/event/:event_name" component={Event}/>
 					<Route path="/found" component={Found}/>
 					<Route path="/" component={Home}/>
 					<Redirect to="/event"></Redirect>

@@ -1,5 +1,5 @@
 var config = {
-	baseUrl:"",
+	baseUrl:"http://60.205.231.63",
 }
 
 export default config

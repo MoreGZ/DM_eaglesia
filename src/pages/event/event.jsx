@@ -5,6 +5,7 @@ import Api from '@/api/api.js'
 import charts from '@/echarts/charts.js'
 
 import PublicHeader from '@/components/header/header'
+import PublicDetail from '@/components/detail/detail'
 
 import './event.css';
 
@@ -51,7 +52,10 @@ class Event extends Component {
 			{key:"news",value:"印尼媒体相关报道",scroll:3320},
 	    ],
 	    currentTag:"info",
-	    currentTagIndex:0
+	    currentTagIndex:0,
+	    isShowDetial:false,
+	    newsPage:2,
+	    commentsPgae:2
 	}
 
 	textFilter = (text,count) => {
@@ -89,7 +93,7 @@ class Event extends Component {
 		}
 	}
 
-	// 初始化currentTag和currentTagIndex
+	// 初始化currentTag和currentTagIndex 
 	initTag = () => {
 		var scrollTop = document.documentElement.scrollTop;
 		var tags = this.state.tags;
@@ -129,115 +133,118 @@ class Event extends Component {
 		
 	}
 	
+	loadMoreNews = async () => {
+		let params = {
+			data:{
+				title:this.state.title,
+				page:this.state.newsPage
+			}
+		}
+		try{
+			let result = await Api.getMoreNews(params);
+			
+			let data = result.data;
+			let news = this.state.news;
+			data.forEach((item) => {
+				news.push(item);
+			})
+
+			this.setState({
+				news:news,
+				newsPage:this.state.newsPage+1
+			})
+		}catch(err){
+			throw(err);
+		}
+	}
+
+	loadMoreComments = async () => {
+		let params = {
+			data:{
+				title:this.state.title,
+				page:this.state.commentsPgae
+			}
+		}
+		try{
+			let result = await Api.getMoreComments(params);
+
+			let data = result.data;
+			let comments = this.state.comments;
+			data.forEach((item) => {
+				comments.push(item);
+			})
+
+			this.setState({
+				comments:comments,
+				commentsPgae:this.state.commentsPgae+1
+			})
+		}catch(err){
+			throw(err);
+		}
+	}
+
+	showDetail = (item) => {
+		let detailDom = this.refs.detail;
+		detailDom.props.news.title = item.title;
+		detailDom.props.news.date = item.date;
+		detailDom.props.news.source = item.source;
+		detailDom.props.news.body = item.body;
+
+		this.setState({
+			isShowDetial:true
+		})
+	}
+
+	initTrackAnimate = () => {
+		var lineDom = ReactDOM.findDOMNode(this.refs.track_line);
+		console.log(lineDom);
+		lineDom.setAttribute('style','height:'+(this.state.track.length-1)*105+'px');
+	}
+
 	initChart = () => {
 		// 态度比例
 		var emotion_chart_box =  ReactDOM.findDOMNode(this.refs.emotion_chart_box);
-		var data=[
-            {value:335, name:'直接访问'},
-            {value:310, name:'邮件营销'},
-            {value:234, name:'联盟广告'},
-            {value:135, name:'视频广告'},
-            {value:1548, name:'搜索引擎'}
-        ];
-		charts.createEmotionChart(emotion_chart_box,data)
+		charts.createEmotionChart(emotion_chart_box,this.state.emotion)
 		
 		
 		// 评价对象
 		var spe_emotion_chart_box1 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box1);
 		var spe_emotion_chart_box2 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box2);
 		var spe_emotion_chart_box3 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box3);
-		var data=[
-        ];
-		charts.createSpeEmotionChart(spe_emotion_chart_box1,data);
-		charts.createSpeEmotionChart(spe_emotion_chart_box2,data);
-		charts.createSpeEmotionChart(spe_emotion_chart_box3,data);
+		charts.createSpeEmotionChart(spe_emotion_chart_box1,this.state.spe_emotion[0]);
+		charts.createSpeEmotionChart(spe_emotion_chart_box2,this.state.spe_emotion[1]);
+		charts.createSpeEmotionChart(spe_emotion_chart_box3,this.state.spe_emotion[2]);
 		
 
 		// 态度趋势
 		var trend_attitude_chart_box = ReactDOM.findDOMNode(this.refs.trend_attitude_chart_box);
-		var data = [];
-		charts.createTrendAttitudeChart(trend_attitude_chart_box,data);
+		charts.createTrendAttitudeChart(trend_attitude_chart_box,this.state.trend_attitude);
 
 		
 		// 热度趋势
 		var trend_value_chart_box = ReactDOM.findDOMNode(this.refs.trend_value_chart_box);
-		var data = [];
-		charts.createTrendValueChart(trend_value_chart_box,data);
+		charts.createTrendValueChart(trend_value_chart_box,this.state.trend_value);
 
 
-		// 全局关键词
+		// // 全局关键词
 		var keywords_chart_box = ReactDOM.findDOMNode(this.refs.keywords_chart_box);
-		var keywords = {
-		    "visualMap": 22199,
-		    "continuous": 10288,
-		    "contoller": 620,
-		    "series": 274470,
-		    "gauge": 12311,
-		    "detail": 1206,
-		    "piecewise": 4885,
-		    "textStyle": 32294,
-		    "markPoint": 18574,
-		    "pie": 38929,
-		    "roseType": 969,
-		    "label": 37517,
-		    "emphasis": 12053,
-		    "yAxis": 57299,
-		    "name": 15418,
-		    "type": 22905,
-		    "gridIndex": 5146,
-		    "normal": 49487,
-		    "itemStyle": 33837,
-		    "min": 4500,
-		    "silent": 5744,
-		    "animation": 4840,
-		    "offsetCenter": 232,
-		    "inverse": 3706,
-		    "borderColor": 4812,
-		    "markLine": 16578,
-		    "line": 76970,
-		    "radiusAxis": 6704,
-		    "radar": 15964,
-		    "data": 60679,
-		    "dataZoom": 24347,
-		    "tooltip": 43420,
-		    "toolbox": 25222,
-		    "geo": 16904,
-		    "parallelAxis": 4029,
-		    "parallel": 5319,
-		    "max": 3393,
-		    "bar": 43066,
-		    "heatmap": 3110,
-		    "map": 20285,
-		    "animationDuration": 3425,
-		    "animationDelay": 2431,
-		    "splitNumber": 5175,
-		    "axisLine": 12738,
-		    "lineStyle": 19601,
-		    "splitLine": 7133,
-		    "axisTick": 8831,
-		    "axisLabel": 17516,
-		    "pointer": 590,
-		};
-		var data = [];
-		for (var name in keywords) {
-		    data.push({
-		        name: name,
-		        value: Math.sqrt(keywords[name])
-		    })
-		}
-		charts.createKeywordChart(keywords_chart_box,data);
+		charts.createKeywordChart(keywords_chart_box,this.state.keywords);
 
 
 		// 正面高频词
 		var posWords_chart_box = ReactDOM.findDOMNode(this.refs.posWords_chart_box);
-		var data = [];
-		charts.createPoswordsChart(posWords_chart_box,data);
+		charts.createPoswordsChart(posWords_chart_box,this.state.posWords);
 
 
 		// 负面高频词
 		var negWords_chart_box = ReactDOM.findDOMNode(this.refs.negWords_chart_box);
-		var data = [];
-		charts.createNegwordsChart(negWords_chart_box,data);
+		charts.createNegwordsChart(negWords_chart_box,this.state.negWords);
+	}
+
+	hideDetail = (a) =>{
+		this.setState({
+			isShowDetial:false
+		})
 	}
 	/*
 	初始化数据
@@ -246,8 +253,11 @@ class Event extends Component {
 	*/
 	initData = async () => {
 		try{
-			var data = await Api.getEventData();
-			data = data.data;
+			let params = {
+				url:"/detail/event/"+this.props.match.params.event_name
+			}
+			var result = await Api.getEventData(params);
+			var data = result.data;
 			console.log(data);
 			this.setState({
 				"title":data.title,
@@ -268,16 +278,19 @@ class Event extends Component {
 			})
 
 			this.initChart();
+
+			this.initTrackAnimate();
 		}catch(err){
 			console.error(err);
 		}
 	}
 	
 	componentWillMount(){
-		this.initData();
+		
 	}
 
 	componentDidMount(){
+		this.initData();
 		window.onscroll = this.showTag;
 	}
 
@@ -365,6 +378,21 @@ class Event extends Component {
 						</div>
 						<div className="track">
 							<h5 className="module_title">事件发展</h5>
+							<div className="track_main">
+								<div className="line" ref="track_line"></div>
+								{
+									this.state.track.map((item,index)=>{
+										return (
+											<div className="circle" key={index}>
+												<article className={ (index%2 == 0) ? "article_right" : "article_left"} onClick={this.showDetail.bind(this,item)}>
+													<p className="track_date">{item.date}</p>
+													<p className="track_date" >{item.title}</p>
+												</article>
+											</div>
+										)
+									})
+								}
+							</div>
 						</div>
 						<div className="emotion_spe_emotion_box">
 							<div className="emotion">
@@ -406,6 +434,7 @@ class Event extends Component {
 									})
 								}
 							</div>
+							<div className="loadMoreBtn" onClick={this.loadMoreComments}>点击加载更多</div>
 						</div>
 						<div className="keywords">
 							<h5 className="module_title">事件关键词</h5>
@@ -425,13 +454,13 @@ class Event extends Component {
 								{
 									this.state.news.map((item,index)=>{
 										return (
-											<div className="text_flow" key={index}>
+											<div className="text_flow" key={index} onClick={this.showDetail.bind(this,item)}>
 												<h5 className="text_title">
 													{item.title}
 													<span className="right">{item.date}</span>
 												</h5>
 												<div className="text_content">
-													<span className="username">报道摘要</span>:{item.body}
+													<span className="username">报道摘要</span>:{item.body.length <= 300 ? item.body : item.body.slice(0,300)+"..."}
 												</div>
 												<p className="text_source">报道来源: {item.source}</p>
 											</div>
@@ -439,10 +468,15 @@ class Event extends Component {
 									})
 								}
 							</div>
+							<div className="loadMoreBtn" onClick={this.loadMoreNews}>点击加载更多</div>
 						</div>
 					</div>
-
+					
 				</div>
+				<div className={this.state.isShowDetial ? "" : "hidden_detail"}>
+					<PublicDetail hide={this.hideDetail.bind(this)} ref="detail"></PublicDetail>
+				</div>
+				
 			</div>
 		);
 	}

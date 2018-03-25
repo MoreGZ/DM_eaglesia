@@ -1,17 +1,57 @@
 #report{
+	width: 1030px;
+	background: #fff;
 	.time_choose{
+		padding-top: 27px;
 		.time_choose_title{
 			padding:22px 25px;
 			font-size: 29px;
 			font-weight: 500;
 			color: #474e59;
+			border-bottom: 1px solid #bdbdbd;
+			font-weight: 800;
+		}
+		.chooser_box{
+			display: inline-block;
+		}
+		.chooser{
+			margin-left: 25px;
+			display: inline-block;
+			
+			input{
+				text-align: center;
+				width: 120px;
+				height: 32px;
+				margin:auto 13px;
+				font-size: 16px;
+				color:#25282e;
+			}
+			img{
+				vertical-align: middle;
+			}
+		}
+		span{
+			display: inline-block;
+			font-size: 16px;
+			color: #393e47;
+			margin: auto 15px;
+		}
+		.check{
+			border-radius: 2px;
+			border:none;
+			outline: none;
+			width: 119px;
+			height: 32px;
+			color:#fefefe;
+			background: #92aedf;
 		}
 	}
 	.report_title{
 		padding:22px 25px;
 		font-size: 25px;
-		font-weight: 500;
+		font-weight: 800;
 		color: #474e59;
+		border-bottom: 1px solid #bdbdbd;
 	}
 	.keyword{
 		overflow: auto;
@@ -19,6 +59,12 @@
 			float: left;
 			width:50%;
 			height: 520px;
+		}
+		.keyword_title{
+			padding:22px 25px;
+			font-size: 25px;
+			font-weight: 800;
+			color: #474e59;
 		}
 	}
 	.emotion_trend{
@@ -35,8 +81,11 @@
 			color:#474e59; 
 		}
 		.emotion_trend_chart{
-			width:100%;
+			width: 1030px;
 			height: 180px;
 		}
+	}
+	.hidden{
+		display: none;
 	}
 }

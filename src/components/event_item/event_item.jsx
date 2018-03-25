@@ -39,7 +39,7 @@ class EventItem extends Component{
 
 		var outputHotValue = (value) => {
 			var dom = [];
-			for (var i=0;i<value;i++){
+			for (var i=0;i<(value+1)/2 && i<5;i++){
 				dom.push(<img src="./img/hotvalue.png" alt="" key={i}/>)
 			}
 
@@ -49,7 +49,7 @@ class EventItem extends Component{
 		return (
 		<div className="event">
 			<div className="top">
-				<NavLink to="/event">
+				<NavLink to={"/event/"+itemData.title} target="_blank">
 					<h5 className="event_title">{itemData.title}</h5>
 				</NavLink>
 				<div className="hot">

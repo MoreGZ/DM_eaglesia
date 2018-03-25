@@ -1,5 +1,4 @@
 import React,{ Component } from "react"
-import ReactDOM from "react-dom"
 
 import EventItem from "@/components/event_item/event_item"
 
@@ -16,7 +15,7 @@ class EventList extends Component {
 				{
 					this.props.events.map((item,index) => {
 						// return <div></div>
-						return (<EventItem itemData={item}></EventItem>)
+						return (<EventItem itemData={item} key={index}></EventItem>)
 					})
 				} 
 			</div>
