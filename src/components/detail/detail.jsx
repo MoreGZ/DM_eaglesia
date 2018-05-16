@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import './detail.css'
+import './detail.less'
 
 class Detail extends Component {
 	static defaultProps = {
 		news : {
 			title:"this is title",
-			date:"2019.2.3",
+			pub_time:"2019.2.3",
 			source:"XX媒体",
 			body:"这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文这里是振文d",
 			lead:"这里是导语"
@@ -31,7 +31,7 @@ class Detail extends Component {
 				<div className="detail_content">
 					<h1 className="detail_title">{news.title}</h1>
 					<div className="detail_body">
-						<span className="detail_date">{news.date}</span>
+						<span className="detail_date">{news.pub_time}</span>
 						<span className="detail_media">{news.source}</span>
 						<div className="main">
 							<p className="detail_lead">

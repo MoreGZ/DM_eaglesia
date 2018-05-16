@@ -1,14 +1,22 @@
 .Home{
 	background: #e8e8e8;
 	overflow: auto;
+	min-height: 100%;
 	.body{
+		overflow: auto;
+		position: absolute;
+		top:80px;
+		width:100%;
+		bottom: 0px;
+		// background: rgba(0,0,0,0.5);
 		.background{
 			position: absolute;
 			left: 0px;
 			right: 0px;
-			top:80px;
 			bottom: 0px;
+			top:0px;
 			overflow: hidden;
+			
 			img{
 				width:1200px;
 				position: absolute;
@@ -69,14 +77,10 @@
 					float: right;
 					margin-top: 8px;
 					margin-right: 20px;
-
 				}
 			}
 			.logo{
-				width: 584px;
 				text-align: center;
-				position: relative;
-				left: -20px;
 			}
 			.events{
 				.event_box{

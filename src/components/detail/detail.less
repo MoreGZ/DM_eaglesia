@@ -5,17 +5,18 @@
 	width: 100%;
 	height: 100%;
 	background: rgba(0,0,0,0.1);
+	z-index: 1;
 	.detail_content{
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		width: 860px;
-		height: 487px;
 		border-radius: 4px;
 		background-color: #fff;
 		margin-left: -430px;
 		margin-top:-300px;
 		padding:25px 20px 28px 20px;
+		overflow: hidden;
 		.out{
 			position: absolute;
 			right: 16px;
@@ -27,7 +28,7 @@
 		}
 		.detail_body{
 			overflow: auto;
-			/*height: 455px;*/
+			height: 455px;
 			span{
 				display: inline-block;
 				padding-top: 0px;

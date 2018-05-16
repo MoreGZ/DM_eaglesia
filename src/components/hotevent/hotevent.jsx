@@ -5,7 +5,7 @@ import api from "@/api/api.js"
 import EventItem from "@/components/event_item/event_item"
 import PublicRank from '@/components/rank/rank'
 
-import './hotevent.css'
+import './hotevent.less'
 
 class Report extends Component {
 	state = {

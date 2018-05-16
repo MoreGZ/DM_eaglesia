@@ -99,7 +99,36 @@ class Api extends Ajax{
 			throw(err);
 		}
 	}
+
+	// 发现页面-热门新闻
+	async loadHotNews(parmas = {}){
+		try{
+			let result = await this.axios("POST","/discover/field",parmas);
+			return result;
+		}catch(err){
+			throw(err);
+		}
+	}
+
+	// 热点新闻页面——态度走向
+	async loadNewsEmotion(parmas ={}){
+		try{
+			let result = await this.axios("POST","/discover/media",parmas);
+			return result;
+		}catch(err){
+			throw(err);
+		}
+	}
 	
+	// 热点新闻页面——态度走向新闻
+	async loadNewsEmotionNews(parmas ={}){
+		try{
+			let result = await this.axios("POST","/discover/attitude",parmas);
+			return result;
+		}catch(err){
+			throw(err);
+		}
+	}
 }
 
 export default new Api()

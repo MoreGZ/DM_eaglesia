@@ -21,7 +21,7 @@ class Rank extends Component {
 							return (
 								<div className="item" key={index}>
 									<span className="index">{index+1}.</span>
-									<NavLink to={"/event/"+item.title} target="_blank">
+									<NavLink to={"/event/"+item.title}>
 										<span className="content">{item.title}</span>
 									</NavLink>
 									{

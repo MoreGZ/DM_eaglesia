@@ -5,7 +5,7 @@ import Api from '@/api/api.js'
 
 import PublicHeader from '@/components/header/header';
 
-import './home.css';
+import './home.less';
 
 class Home extends Component {
 
@@ -70,7 +70,7 @@ class Home extends Component {
 							{
 								this.state.events.map((item,index) => {
 									return (
-										<Link to={"/event/"+item.title} key={index} target="_blank">
+										<Link to={"/event/"+item.title} key={index}>
 											<div className={"event_box event"+(index+1)}>
 												<span className="title">{item.title}</span>
 											</div>

@@ -7,7 +7,7 @@ import charts from '@/echarts/charts.js'
 import PublicHeader from '@/components/header/header'
 import PublicDetail from '@/components/detail/detail'
 
-import './event.css';
+import './event.less';
 
 class Event extends Component {
 
@@ -186,7 +186,7 @@ class Event extends Component {
 	showDetail = (item) => {
 		let detailDom = this.refs.detail;
 		detailDom.props.news.title = item.title;
-		detailDom.props.news.date = item.date;
+		detailDom.props.news.pub_time = item.pub_time;
 		detailDom.props.news.source = item.source;
 		detailDom.props.news.body = item.body;
 
@@ -197,7 +197,6 @@ class Event extends Component {
 
 	initTrackAnimate = () => {
 		var lineDom = ReactDOM.findDOMNode(this.refs.track_line);
-		console.log(lineDom);
 		lineDom.setAttribute('style','height:'+(this.state.track.length-1)*105+'px');
 	}
 
@@ -208,37 +207,42 @@ class Event extends Component {
 		
 		
 		// 评价对象
-		var spe_emotion_chart_box1 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box1);
-		var spe_emotion_chart_box2 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box2);
-		var spe_emotion_chart_box3 =  ReactDOM.findDOMNode(this.refs.spe_emotion_chart_box3);
-		charts.createSpeEmotionChart(spe_emotion_chart_box1,this.state.spe_emotion[0]);
-		charts.createSpeEmotionChart(spe_emotion_chart_box2,this.state.spe_emotion[1]);
-		charts.createSpeEmotionChart(spe_emotion_chart_box3,this.state.spe_emotion[2]);
+		this.state.spe_emotion.forEach((item, index) => {
+			charts.createSpeEmotionChart(
+				ReactDOM.findDOMNode(this.refs['spe_emotion_chart_box'+index]),
+				item
+			);
+		})
 		
 
 		// 态度趋势
-		var trend_attitude_chart_box = ReactDOM.findDOMNode(this.refs.trend_attitude_chart_box);
-		charts.createTrendAttitudeChart(trend_attitude_chart_box,this.state.trend_attitude);
-
+		if(this.state.trend_attitude){
+			var trend_attitude_chart_box = ReactDOM.findDOMNode(this.refs.trend_attitude_chart_box);
+			charts.createTrendAttitudeChart(trend_attitude_chart_box,this.state.trend_attitude);
+		}
 		
 		// 热度趋势
-		var trend_value_chart_box = ReactDOM.findDOMNode(this.refs.trend_value_chart_box);
-		charts.createTrendValueChart(trend_value_chart_box,this.state.trend_value);
+		if(this.state.trend_value){
+			var trend_value_chart_box = ReactDOM.findDOMNode(this.refs.trend_value_chart_box);
+			charts.createTrendValueChart(trend_value_chart_box,this.state.trend_value);
+		}
 
-
-		// // 全局关键词
+		// 全局关键词
 		var keywords_chart_box = ReactDOM.findDOMNode(this.refs.keywords_chart_box);
 		charts.createKeywordChart(keywords_chart_box,this.state.keywords);
 
 
 		// 正面高频词
-		var posWords_chart_box = ReactDOM.findDOMNode(this.refs.posWords_chart_box);
-		charts.createPoswordsChart(posWords_chart_box,this.state.posWords);
-
-
+		if(this.state.posWords){
+			var posWords_chart_box = ReactDOM.findDOMNode(this.refs.posWords_chart_box);
+			charts.createPoswordsChart(posWords_chart_box,this.state.posWords);
+		}
+		
 		// 负面高频词
-		var negWords_chart_box = ReactDOM.findDOMNode(this.refs.negWords_chart_box);
-		charts.createNegwordsChart(negWords_chart_box,this.state.negWords);
+		if(this.state.negWords){
+			var negWords_chart_box = ReactDOM.findDOMNode(this.refs.negWords_chart_box);
+			charts.createNegwordsChart(negWords_chart_box,this.state.negWords);
+		}
 	}
 
 	hideDetail = (a) =>{
@@ -258,7 +262,6 @@ class Event extends Component {
 			}
 			var result = await Api.getEventData(params);
 			var data = result.data;
-			console.log(data);
 			this.setState({
 				"title":data.title,
 				"info":data.info,
@@ -403,9 +406,11 @@ class Event extends Component {
 							</div>
 							<div className="spe_emotion">
 								<h5 className="module_title spe_emotion_title">评价对象</h5>
-								<div className="spe_emotion_chart_box1 chart_box" ref="spe_emotion_chart_box1"></div>
-								<div className="spe_emotion_chart_box2 chart_box" ref="spe_emotion_chart_box2"></div>
-								<div className="spe_emotion_chart_box3 chart_box" ref="spe_emotion_chart_box3"></div>
+								{
+									this.state.spe_emotion.map((item,index) => {
+										return <div className="spe_emotion_chart_box1 chart_box" ref={"spe_emotion_chart_box"+index} key={index}></div>
+									})
+								}
 							</div>
 						</div>
 						<div className="trend_attitude">

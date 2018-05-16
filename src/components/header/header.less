@@ -5,7 +5,6 @@
 .header{
 	height: 80px;
 	width:100%;
-	
 	.main{
 		width: 1210px;
 		height: 100%;
@@ -30,18 +29,15 @@
 	.navbar{
 		float: left;
 		margin-left: 45px;
-		ul{
-			li{
-				float: left;
+		.navbar_item{
+			float: left;
+			.navbar_subItem{
+				position: absolute;
+				z-index: 2;
+				display: none;
 				a{
-					display: block;
-					width: 79px;
-					height: 100%; 
-					line-height: 80px;
-					font-size: 21px;
-					
-					text-align: center;
-					transition: all 0.2s linear;
+					height: 50px;
+					line-height: 50px;
 				}
 				.active{
 					background: @base-color2;
@@ -49,6 +45,65 @@
 					box-shadow: 0px 1px 5px 0px rgba(170, 170, 170, 0.75);
 				}
 			}
+			a{
+				display: block;
+				padding-left:20px;
+				padding-right:20px;
+				height: 100%; 
+				line-height: 80px;
+				font-size: 21px;
+				text-align: center;
+				transition: all 0.2s linear;
+			}
+			.active{
+				background: @base-color2;
+				color:#fff;
+				box-shadow: 0px 1px 5px 0px rgba(170, 170, 170, 0.75);
+			}
+		}
+		.navbar_item:hover{
+			.navbar_subItem{
+				display: block;
+			}
+		}
+	}
+	.changelanguage{
+		float: left;
+		position: relative;
+		height: 100%;
+		margin-left: 60px;
+		.currentLanguage{
+			width:100px;
+			height: 30px;
+			line-height: 30px;
+			margin-top: 50px;
+			text-align: center;
+			background:@base-color1;
+		}
+		
+		ul{
+			position: absolute;
+			display: none;
+			li{
+				cursor: pointer;
+				width:100px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				background:@base-color1;
+			}
+			li:hover{
+				background:@base-color2;
+				
+			}
+		}
+	}
+	.changelanguage:hover{
+		ul{
+			display: block;
+		}
+		.currentLanguage{
+			background:@base-color2;
 		}
 	}
 	.searchbox{
@@ -96,7 +151,7 @@
 	color:#fff;
 	a{
 		color:#fff;
-		
+		background-color: #333;
 	}
 }
 
@@ -105,6 +160,6 @@
 	color:#333;
 	a{
 		color:#333;
-
+		background-color: #fff;
 	}
 }

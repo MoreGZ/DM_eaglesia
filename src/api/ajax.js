@@ -48,7 +48,6 @@ class Ajax {
 			}
 			axios.request(axiosConfig)
 			.then(res=>{
-				// console.log(res);
 				var data = typeof res.data === "object" ? res.data : JSON.parse(res.data);
 				resolse(res);
 			},err=>{

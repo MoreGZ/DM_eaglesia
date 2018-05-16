@@ -4,9 +4,8 @@ import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
 import PublicHeader from '@/components/header/header'
 import Report from "@/components/report/report"
 import HotEvent from "@/components/hotevent/hotevent"
-import HotNews from "@/components/hotnews/hotnews"
 
-import './found.css'
+import './found.less'
 
 class Found extends Component {
 	state = {
@@ -35,7 +34,6 @@ class Found extends Component {
 					<div className="nav">
 						<ul>
 							<li><NavLink to={`${this.props.match.path}/hotevent`}>热点新闻事件</NavLink></li>
-							<li><NavLink to={`${this.props.match.path}/hotnews`}>热点新闻事件</NavLink></li>
 							<li><NavLink to={`${this.props.match.path}/report/month`}>月度舆情报告</NavLink></li>
 							<li><NavLink to={`${this.props.match.path}/report/year`}>年度舆情报告</NavLink></li>
 						</ul>
@@ -43,7 +41,6 @@ class Found extends Component {
 					<div className="main">
 						<Switch>
 							<Route path={`${this.props.match.path}/hotevent`} component={HotEvent}></Route>
-							<Route path={`${this.props.match.path}/hotnews`} component={HotNews}></Route>
 							<Route path={`${this.props.match.path}/report/:type`} component={Report}></Route>
 							<Redirect from={`${this.props.match.path}`} to={`${this.props.match.path}/hotevent`} exact component={HotEvent} />
 						</Switch>

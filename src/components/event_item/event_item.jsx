@@ -49,7 +49,7 @@ class EventItem extends Component{
 		return (
 		<div className="event">
 			<div className="top">
-				<NavLink to={"/event/"+itemData.title} target="_blank">
+				<NavLink to={"/event/"+itemData.title}>
 					<h5 className="event_title">{itemData.title}</h5>
 				</NavLink>
 				<div className="hot">

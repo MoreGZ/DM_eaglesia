@@ -1,14 +1,16 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
-// import { HashRouter, Route } from 'react-router-dom'
-
-// import registerServiceWorker from './registerServiceWorker'
+import { Provider } from 'react-redux';
 
 import Route from './router/router.jsx'
-// import Home from './pages/home/home.jsx'; 
+import store from '@/redux/store'
 
 import './style/reset.css'; 
 
 
-ReactDOM.render(<Route/>, document.getElementById('root'));
-// registerServiceWorker();
+ReactDOM.render(
+    <Provider store={store}>
+        <Route/>
+    </Provider>
+    , document.getElementById('root')
+);

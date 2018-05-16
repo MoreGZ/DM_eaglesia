@@ -13,10 +13,10 @@ class Report extends Component {
 		"events": [],
 		year:[2014,2015,2016,2017,2018],
 		month:[1,2,3,4,5,6,7,8,9,10,11,12],
-		currentMonth:new Date().getMonth()+1,
-		targetMonth:new Date().getMonth()+1,
-		currentYear:new Date().getFullYear(),
-		targetYear:new Date().getFullYear(),
+		currentMonth:new Date().getMonth(),
+		targetMonth:new Date().getMonth(),
+		currentYear:new Date().getFullYear()-1,
+		targetYear:new Date().getFullYear()-1,
 		// 判断当前报表状态，可以是year，可以是month
 		status:"year",
 	}
@@ -133,6 +133,7 @@ class Report extends Component {
 				result = await this.fetchMonthData();
 			}
 			let data = result.data;
+			console.log(data);
 			this.setState({
 				events:data.events,
 				keywords:data.keywords,
@@ -149,7 +150,6 @@ class Report extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log(nextProps);
 		if(this.props.match.params.type !== nextProps.match.params.type){
 			this.fetchData(nextProps.match.params.type);
 		}

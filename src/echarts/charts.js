@@ -118,7 +118,7 @@ class chartFactory extends ChartFatherFactory{
 		                }
 		                
 		            },
-		            data: [1]
+		            data: [data.pos+data.neg+data.neu]
 		        },
 		        {
 		            name: '赞成',
@@ -401,7 +401,7 @@ class chartFactory extends ChartFatherFactory{
 		        data: date
 		    },
 		    yAxis: {
-		    	name:"态度占比",
+		    	name:"热度值",
 		    	nameGap:15,
 		    	nameTextStyle:{
 					fontSize:20,
@@ -542,7 +542,7 @@ class chartFactory extends ChartFatherFactory{
 		    },
 		    series : [
 		        {
-		            name:'直接访问',
+		            name:'词频度',
 		            type:'bar',
 		            barWidth: '60%',
 		            data:value
@@ -602,7 +602,7 @@ class chartFactory extends ChartFatherFactory{
 		    },
 		    series : [
 		        {
-		            name:'直接访问',
+		            name:'词频度',
 		            type:'bar',
 		            barWidth: '60%',
 		            data:value
@@ -614,7 +614,7 @@ class chartFactory extends ChartFatherFactory{
 
 	// 态度比例_搜索页面
 	searchCreateEmotionChart(dom,data){
-		console.log(data["pos"]);
+		// console.log(data["pos"]);
 		var option = {
 		    tooltip : {
 	        trigger: 'item',

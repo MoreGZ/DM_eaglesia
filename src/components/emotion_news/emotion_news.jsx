@@ -1,29 +1,50 @@
 import React,{ Component } from "react"
-import { connect } from 'react-redux'
 
 import Api from "@/api/api.js"
+import { connect } from 'react-redux'
 
 import PublicDetail from '@/components/detail/detail'
 
-import './hotnews.less'
+import './emotion_news.less'
 
-class Report extends Component {
+class Emotion_news extends Component {
 	static defaultProps = {
-		txtmaxLength: 160,
-		titlemaxLangth:35
+		txtmaxLength: 180,
+		titlemaxLangth:18
 	}
 	state = {
 		"news":[],
 	    isShowDetial:false,
 		newsPage:1,
 		classMap:{
-			political:"政治",
-			economic:"经济",
-			society:"社会",
-			technology:"科技",
-			military:"军事",
-			culture:"文化",
-			surroundings:"环境",
+			support:1,
+			oppose:0,
+		}
+	}
+	
+	loadNews = async () => {
+		let params = {
+			data:{
+				language:this.props.language,
+				page:this.state.newsPage,
+				emotion:this.state.classMap[this.props.match.params.type]
+			}
+		}
+		try{
+			let result = await Api.loadNewsEmotionNews(params);
+			
+			let data = result.data;
+			let news = this.state.news;
+			data.forEach((item) => {
+				news.push(item);
+			})
+
+			this.setState({
+				news:news,
+				newsPage:this.state.newsPage+1
+			})
+		}catch(err){
+			throw(err);
 		}
 	}
 
@@ -45,35 +66,8 @@ class Report extends Component {
 		})
 	}
 
-	fetchData = async () => {
-		let params = {
-			data:{
-				page: this.state.newsPage,
-				language: this.props.language,
-				class: this.state.classMap[this.props.match.params.type]
-			}
-		}
-		console.log(params.data);
-		try{
-			let result = await Api.loadHotNews(params);
-			
-			let data = result.data;
-			let news = this.state.news;
-			data.forEach((item) => {
-				news.push(item);
-			})
-
-			this.setState({
-				news:news,
-				newsPage:this.state.newsPage+1
-			})
-		}catch(err){
-			throw(err);
-		}
-	}
-
 	componentDidMount(){
-		this.fetchData();
+		this.loadNews();
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -83,7 +77,7 @@ class Report extends Component {
 				isShowDetial:false,
 				newsPage:1,
 			},() => {
-				this.fetchData();
+				this.loadNews();
 			})
 		}
 
@@ -93,14 +87,14 @@ class Report extends Component {
 				isShowDetial:false,
 				newsPage:1,
 			},() => {
-				this.fetchData();
+				this.loadNews();
 			})
 		}
 	}
 
 	render(){
 		return (
-			<div id="hotnews">
+			<div id="emotion_news">
 				<h5 className="module_title news_title">印尼媒体相关报道</h5>
 				<div className="text_flow_box text_flow_box_height">
 					{
@@ -108,10 +102,17 @@ class Report extends Component {
 							return (
 								<div className="text_flow" key={index} onClick={this.showDetail.bind(this,item)}>
 									<h5 className="text_title">
-										
 										{item.title.length <= this.props.titlemaxLangth ? item.title : item.title.slice(0,this.props.titlemaxLangth)+"..."}
+										<span className="classtag">
+											{
+												item.class.map((tagItem) => {
+													return tagItem ? (<span className="tag">{tagItem}</span>) : ""
+												})
+											}
+										</span>
 										<span className="pub_time">{item.pub_time}</span>
 									</h5>
+									
 									<div className="text_content">
 										<span className="username">报道摘要</span>:{item.body.length <= this.props.txtmaxLength ? item.body : item.body.slice(0,this.props.txtmaxLength)+"..."}
 									</div>
@@ -121,7 +122,7 @@ class Report extends Component {
 						})
 					}
 				</div>
-				<div className="loadMoreBtn" onClick={this.fetchData}>点击加载更多</div>
+				<div className="loadMoreBtn" onClick={this.loadNews}>点击加载更多</div>
 				<div className={this.state.isShowDetial ? "" : "hidden_detail"}>
 					<PublicDetail hide={this.hideDetail.bind(this)} ref="detail"></PublicDetail>
 				</div>
@@ -134,4 +135,4 @@ export default connect(
 	(state) => ({
 		language:state.language
 	})
-)(Report);
+)(Emotion_news);
